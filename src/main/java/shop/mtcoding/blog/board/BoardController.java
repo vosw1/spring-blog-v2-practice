@@ -20,7 +20,9 @@ public class BoardController {
 
     @PostMapping("/board/{id}/delete")
     public String delete(@PathVariable Integer id) {
+        System.out.println("id:" + id);
         boardRepository.deleteById(id);
+        System.out.println("delete 쿼리 발동");
         return "redirect:/";
     }
 
