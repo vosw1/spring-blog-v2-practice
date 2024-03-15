@@ -1,8 +1,9 @@
-package shop.mtcoding.blog._core.utils.exception;
+package shop.mtcoding.blog._core.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import shop.mtcoding.blog._core.utils.exception.*;
 
 @ControllerAdvice
 public class myExceptionHandler {
