@@ -18,6 +18,19 @@ public class BoardController {
     private final BoardRepository boardRepository;
     private final HttpSession session;
 
+    @PostMapping("/board/{id}/update")
+    public String update(@PathVariable Integer id, BoardRequest.UpdateDTO reqDTO) {
+        boardRepository.updateById(id, reqDTO.getTitle(), reqDTO.getContent());
+        return "redirect:/board/" + id;
+    }
+
+    @GetMapping("/board/{id}/update-form")
+    public String updateForm(@PathVariable(name = "id") Integer id, HttpServletRequest req) {
+        Board board = boardRepository.findById(id);
+        req.setAttribute("board", board);
+        return "board/update-form";
+    }
+
     @PostMapping("/board/{id}/delete")
     public String delete(@PathVariable Integer id) {
         System.out.println("id:" + id);
@@ -46,7 +59,7 @@ public class BoardController {
     }
 
     @GetMapping("/board/{id}")
-    public String detail(@PathVariable Integer id, HttpServletRequest request) {
+    public String detail(@PathVariable Integer id, HttpServletRequest request) { // Integer : 없으면 null, int : 0
         Board board = boardRepository.findByIdJoinUser(id);
         request.setAttribute("board", board);
         return "board/detail";

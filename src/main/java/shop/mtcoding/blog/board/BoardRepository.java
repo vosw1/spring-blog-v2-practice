@@ -42,4 +42,11 @@ public class BoardRepository {
         query.setParameter("id", id);
         return (Board) query.getSingleResult();
     }
+
+    @Transactional
+    public void updateById(int id, String title, String content) { // DTO를 안만들고 꺼내서 넘겨도 됨 -> 재사용 가능
+        Board board = findById(id);
+        board.setTitle(title);
+        board.setContent(content);
+    }
 }
