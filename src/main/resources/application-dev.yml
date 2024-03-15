@@ -1,6 +1,34 @@
 server:
   servlet:
     encoding:
-      charset: utf-8
+      charset: utf-8 # 문자 인코딩을 UTF-8로 설정
       force: true
+    session: # session 유지 시간 설정
+      timeout: 30m
   port: 8080
+
+spring:
+  mustache:
+    servlet:
+      expose-session-attributes: true # session에 속성 노출 설정
+      expose-request-attributes: true # session에 요청 속성 노출 설정
+  datasource: # H2 데이터베이스를 사용하는 설정
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test;MODE=MySQL # 연결URL ; H2를 MySQL과 호환되도록 설정
+    username: sa # 사용자 이름
+    password: # 사용자 비밀번호
+  h2:
+    console:
+      enabled: true # 웹에서 콘솔에 접근할 수 있게 활성화
+  sql:
+    init:
+      data-locations:
+        - classpath:db/data.sql #리소스 폴더(로케이션 파일이 여러개 일 수 있음)를 가리킴
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true # 표기 방법 변경
+    defer-datasource-initialization: true # 데이터 소스 초기화를 지연
