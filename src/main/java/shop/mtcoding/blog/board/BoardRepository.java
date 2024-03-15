@@ -14,6 +14,18 @@ public class BoardRepository {
 
     private final EntityManager em;
 
+    public Board findById(int id) {
+        Board board = em.find(Board.class, id);
+        return board;
+    }
+
+    @Transactional
+    public void deleteById(int id){
+        Query query = em.createQuery("delete from Board b where b.id =:id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+    }
+
     @Transactional
     public Board save(Board board) {
         em.persist(board);
@@ -23,5 +35,11 @@ public class BoardRepository {
     public List<Board> findAll() {
         Query query = em.createQuery("select b from Board b order by b.id desc", Board.class);
         return query.getResultList();
+    }
+
+    public Board findByIdJoinUser(int id) {
+        Query query = em.createQuery("select b from Board b join fetch b.user u where b.id = :id", Board.class);
+        query.setParameter("id", id);
+        return (Board) query.getSingleResult();
     }
 }
