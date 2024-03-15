@@ -2,6 +2,8 @@ package shop.mtcoding.blog.user;
 
 import lombok.Data;
 
+import javax.swing.plaf.PanelUI;
+
 public class UserRequest {
 
     @Data
@@ -17,5 +19,11 @@ public class UserRequest {
                     .email(email)
                     .build();
         }
+    }
+
+    @Data
+    public static class LoginDTO {
+        private String username;
+        private String password;
     }
 }
