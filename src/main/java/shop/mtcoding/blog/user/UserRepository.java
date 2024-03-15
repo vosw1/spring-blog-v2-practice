@@ -12,6 +12,19 @@ public class UserRepository {
     private final EntityManager em;
 
     @Transactional
+    public User updateById(int id, String password, String email) { // DTO를 안만들고 꺼내서 넘겨도 됨 -> 재사용 가능
+        User user = findById(id);
+        user.setPassword(password);
+        user.setEmail(email);
+        return user;
+    }
+
+    public User findById(int id) {
+        User user = em.find(User.class, id);
+        return user;
+    }
+
+    @Transactional
     public User save(User user){
         em.persist(user);
         return user;

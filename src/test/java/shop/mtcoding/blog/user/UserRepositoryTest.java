@@ -13,6 +13,18 @@ public class UserRepositoryTest {
     private UserRepository userRepository;
 
     @Test
+    public void updateById_test() {
+    // given
+    int id = 1;
+    String password = "12345";
+    String email = "ssar12@nate.com";
+    //when
+    User user = userRepository.updateById(id, password, email);
+    //then
+        System.out.println("updateById_test : " + user);
+    }
+
+    @Test
     public void findByUsername_test(){
         // given
         UserRequest.LoginDTO reqDTO = new UserRequest.LoginDTO();
